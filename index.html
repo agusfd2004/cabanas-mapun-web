@@ -7,8 +7,11 @@
 <meta name="description" content="Cabañas de madera entre pinos, a un paso de las playas de Mar Azul. Kepuche, Lihué, Ayilen, Kupal y Suyai — reservá por WhatsApp.">
 <meta name="theme-color" content="#2E4A37">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8C%B2%3C/text%3E%3C/svg%3E">
+<link rel="canonical" href="https://cabanas-mapun.netlify.app/">
+<meta name="robots" content="index, follow">
 
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://cabanas-mapun.netlify.app/">
 <meta property="og:locale" content="es_AR">
 <meta property="og:title" content="Cabañas Mapun — Mar Azul">
 <meta property="og:description" content="Cabañas de madera entre pinos, a un paso de las playas de Mar Azul. Kepuche, Lihué, Ayilen, Kupal y Suyai — reservá por WhatsApp.">
@@ -395,11 +398,11 @@
   .filmstrip-wrap{position:relative;}
   .filmstrip{
     display:flex; gap:1.2em; overflow-x:auto; padding-bottom:0.8em; margin-top:0.4em;
-    scroll-snap-type:x proximity;
+    scroll-snap-type:x mandatory;
     scrollbar-width:none; -ms-overflow-style:none;
   }
   .filmstrip::-webkit-scrollbar{display:none; height:0;}
-  .film{flex:0 0 auto; width:min(72vw, 300px); scroll-snap-align:start;}
+  .film{flex:0 0 auto; width:min(72vw, 300px); scroll-snap-align:center; scroll-snap-stop:always;}
   .film img{width:100%; aspect-ratio:4/5; object-fit:cover; cursor:zoom-in; transition:transform 0.25s ease;}
   .film img:hover{transform:scale(1.02);}
   .film figcaption{margin-top:0.8em; font-size:0.88rem; color:var(--dusk-ink-soft); font-weight:600; letter-spacing:0.02em;}
@@ -472,6 +475,45 @@
   .foot-links a:hover{color:var(--dusk-ink);}
   .foot-fine{width:100%; font-size:0.78rem; color:rgba(166,176,155,0.7); margin-top:0.8em; border-top:1px solid rgba(237,233,216,0.1); padding-top:1.2em;}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Cabañas Mapun",
+  "description": "Cabañas de madera entre pinos, a un paso de las playas de Mar Azul. Cinco cabañas: Kepuche, Lihué, Ayilen, Kupal y Suyai.",
+  "url": "https://cabanas-mapun.netlify.app/",
+  "telephone": "+5491131727631",
+  "image": "https://static.wixstatic.com/media/d6695d_1a5e6368747c424cac65f090d2e6c850~mv2.jpg/v1/fill/w_1200,h_630,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/d6695d_1a5e6368747c424cac65f090d2e6c850~mv2.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Copacabana 1036",
+    "addressLocality": "Mar Azul, Villa Gesell",
+    "addressRegion": "Buenos Aires",
+    "postalCode": "B7165",
+    "addressCountry": "AR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -37.3411388,
+    "longitude": -57.0352679
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.3",
+    "reviewCount": "49"
+  },
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "WiFi", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Estacionamiento privado", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Parrilla individual", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Se admiten mascotas", "value": true }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/cabaniasmapun/",
+    "https://www.facebook.com/cabaniasmapun/"
+  ]
+}
+</script>
 </head>
 <body>
 
