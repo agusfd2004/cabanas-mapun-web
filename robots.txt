@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cabanas-mapun.netlify.app/sitemap.xml
