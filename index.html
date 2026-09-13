@@ -441,6 +441,19 @@
   .llegar-rating{margin-top:1em; font-size:0.92rem; color:var(--ink-soft); letter-spacing:0.02em;}
   .llegar-tip{margin-top:0.9em; font-size:0.9rem; color:var(--ink-soft); font-style:italic;}
   .llegar-figure img{width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:var(--shadow);}
+
+  /* ---------- faq ---------- */
+  .faq{padding:5em 0;}
+  .faq-list{margin-top:1em; border-top:1px solid var(--line);}
+  .faq-item{border-bottom:1px solid var(--line); padding:1.4em 0;}
+  .faq-item summary{
+    cursor:pointer; font-weight:700; font-size:1.05rem; color:var(--ink);
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:1em;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+"; font-family:var(--serif); font-size:1.4rem; color:var(--pine); flex-shrink:0; line-height:1;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{color:var(--ink-soft); margin-top:0.9em; font-size:0.98rem; max-width:60ch;}
   .llegar-figure iframe{width:100%; aspect-ratio:4/5; border:0; box-shadow:var(--shadow); filter:grayscale(0.15) contrast(1.05);}
   @media (max-width:760px){ .llegar-grid{grid-template-columns:1fr;} }
 
@@ -524,6 +537,7 @@
       <li><a href="#cabanas">Cabañas</a></li>
       <li><a href="#galeria">Galería</a></li>
       <li><a href="#llegar">Cómo llegar</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <span class="nav-social">
@@ -743,6 +757,45 @@
     </div>
     <div class="llegar-figure">
       <img src="/images/img014.jpg" alt="Mapa de ubicación de Cabañas Mapun en Mar Azul" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head on-light">
+      <p class="eyebrow on-light">Preguntas frecuentes</p>
+      <h2>Antes de reservar</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>¿Qué medios de pago aceptan?</summary>
+        <p>Efectivo o transferencia bancaria.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Hay WiFi?</summary>
+        <p>Sí, en las cinco cabañas.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Puedo llevar mascota?</summary>
+        <p>Sí, son bienvenidas avisando con anticipación.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Se puede fumar?</summary>
+        <p>Sí, está permitido.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Hay una estadía mínima?</summary>
+        <p>Sí, 4 noches.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cómo llego sin auto?</summary>
+        <p>En micro hasta la terminal de Villa Gesell, y desde ahí en remis o colectivo hasta Mar Azul.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Aceptan visitas de un día?</summary>
+        <p>Sí, avisando con anticipación.</p>
+      </details>
     </div>
   </div>
 </section>
