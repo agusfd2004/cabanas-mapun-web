@@ -144,7 +144,7 @@
   .nav{
     position:sticky; top:0; z-index:50;
     background:linear-gradient(180deg, #3A5A44 0%, #213526 100%);
-    box-shadow:0 8px 20px -10px rgba(15,19,13,0.5);
+    box-shadow:0 8px 22px -6px rgba(217,142,59,0.55);
   }
   .nav-inner{
     width:min(1120px, 92%); margin-inline:auto;
@@ -512,6 +512,34 @@
     transition:background 0.2s ease;
   }
   .filmstrip-nav:hover{background:var(--bg);}
+
+  /* desktop: revert to multi-card filmstrip (mobile keeps the one-slide carousel) */
+  @media (min-width:761px){
+    .filmstrip-wrap{max-width:none; position:relative;}
+    .filmstrip{
+      gap:1.2em; border-radius:0; box-shadow:none; padding-bottom:0.4em;
+    }
+    .film{
+      flex:0 0 auto; width:min(28vw, 300px); aspect-ratio:auto;
+      scroll-snap-align:center;
+      background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow-card);
+      padding:0.7em;
+    }
+    .film img{
+      width:100%; height:auto; aspect-ratio:4/5; object-fit:cover;
+      border-radius:var(--radius-sm);
+    }
+    .film-scrim{display:none;}
+    .film figcaption{
+      position:static; margin-top:0.7em; padding:0 0.2em 0.2em; text-align:left;
+    }
+    .film-title{color:var(--ink); font-size:1.05rem;}
+    .g-controls{position:absolute; top:40%; left:-1.3em; right:-1.3em; transform:translateY(-50%);
+      justify-content:space-between; margin-top:0; pointer-events:none;}
+    .g-dots{display:none;}
+    .g-nav-btns{width:100%; justify-content:space-between; pointer-events:none;}
+    .g-nav-btns .filmstrip-nav{pointer-events:auto;}
+  }
 
   /* ---------- llegar ---------- */
   .llegar{padding:5.5em 0;}
@@ -1705,11 +1733,18 @@
       var i = Math.round(strip.scrollLeft / strip.clientWidth);
       setActive(Math.max(0, Math.min(i, dots.length - 1)));
     });
+    function step(){
+      var film = strip.querySelector('.film');
+      if(!film) return strip.clientWidth;
+      var style = getComputedStyle(strip);
+      var gap = parseFloat(style.columnGap || style.gap || '0') || 0;
+      return film.getBoundingClientRect().width + gap;
+    }
     prev.addEventListener('click', function(){
-      strip.scrollBy({left: -strip.clientWidth, behavior: 'smooth'});
+      strip.scrollBy({left: -step(), behavior: 'smooth'});
     });
     next.addEventListener('click', function(){
-      strip.scrollBy({left: strip.clientWidth, behavior: 'smooth'});
+      strip.scrollBy({left: step(), behavior: 'smooth'});
     });
   })();
 
