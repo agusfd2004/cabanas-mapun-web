@@ -143,8 +143,8 @@
   /* ---------- nav ---------- */
   .nav{
     position:sticky; top:0; z-index:50;
-    background:var(--pine);
-    border-bottom:1px solid rgba(237,233,216,0.12);
+    background:linear-gradient(180deg, #3A5A44 0%, #213526 100%);
+    box-shadow:0 8px 20px -10px rgba(15,19,13,0.5);
   }
   .nav-inner{
     width:min(1120px, 92%); margin-inline:auto;
@@ -160,9 +160,11 @@
   .nav-links{display:flex; align-items:center; gap:1.8em; list-style:none; margin:0; padding:0;}
   .nav-links a{
     color:var(--dusk-ink-soft); text-decoration:none; font-weight:600; font-size:0.92rem;
-    transition:color 0.15s ease;
+    padding-bottom:0.3em; border-bottom:2px solid transparent;
+    transition:color 0.15s ease, border-color 0.15s ease;
   }
   .nav-links a:hover{color:var(--dusk-ink);}
+  .nav-links a.active{color:var(--dusk-ink); border-bottom-color:var(--ember);}
   .nav-cta{white-space:nowrap;}
   .nav-social{display:inline-flex; align-items:center; gap:0.5em; flex-shrink:0;}
   .nav-whatsapp, .nav-instagram{
@@ -1722,6 +1724,29 @@
         target.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block: 'start'});
       });
     });
+  })();
+
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+    if(!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if(el) map[id] = a;
+    });
+    var ids = Object.keys(map);
+    if(!ids.length) return;
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        var link = map[entry.target.id];
+        if(!link) return;
+        links.forEach(function(a){ a.classList.remove('active'); });
+        link.classList.add('active');
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    ids.forEach(function(id){ observer.observe(document.getElementById(id)); });
   })();
 </script>
 
