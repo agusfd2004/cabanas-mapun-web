@@ -59,6 +59,9 @@
     --line:rgba(32,41,29,0.15);
     --line-dusk:rgba(237,233,216,0.18);
     --shadow: 0 18px 40px -18px rgba(20,26,17,0.35);
+    --shadow-card: 0 14px 34px -16px rgba(20,26,17,0.22);
+    --radius:18px;
+    --radius-sm:12px;
     --serif:"Fraunces", Georgia, "Iowan Old Style", serif;
     --sans:"Karla", "Trebuchet MS", -apple-system, sans-serif;
   }
@@ -227,31 +230,38 @@
   .hero-actions{display:flex; gap:1em; margin-top:1.8em; flex-wrap:wrap;}
 
   /* ---------- intro marks ---------- */
-  .intro{padding:4.2em 0 3.6em; margin-top:-46px; position:relative; z-index:1;}
-  @media (max-width:640px){ .intro{margin-top:-28px;} }
+  .intro{padding:0 0 3.6em; margin-top:-64px; position:relative; z-index:1;}
+  @media (max-width:640px){ .intro{margin-top:-40px;} }
   .intro .eyebrow{justify-content:center; width:100%;}
-  .intro-head{text-align:center; margin-bottom:2.6em;}
+  .intro-head{text-align:center; margin:2.8em 0 2.6em;}
   .intro-head h2{font-size:clamp(1.5rem,2.6vw,2rem);}
   .marks{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:0;
-    border-top:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1.1em;
   }
   .mark{
-    padding:2em 2.2em; border-left:1px solid var(--line);
+    background:var(--surface);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-card);
+    padding:1.6em 1.5em;
+    display:flex; flex-direction:column; gap:0.6em;
   }
-  .mark:first-child{border-left:none;}
-  .mark h3{font-size:1.15rem; margin-bottom:0.4em; font-weight:600;}
-  .mark p{color:var(--ink-soft); font-size:0.96rem;}
+  .mark-icon{
+    width:2.6em; height:2.6em; border-radius:50%;
+    background:rgba(46,74,55,0.1); color:var(--pine);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .mark-icon svg{width:1.35em; height:1.35em;}
+  .mark h3{font-size:1.05rem; font-weight:600;}
+  .mark p{color:var(--ink-soft); font-size:0.92rem;}
   @media (max-width:760px){
     .marks{grid-template-columns:1fr;}
-    .mark{border-left:none; border-top:1px solid var(--line); padding:1.6em 0;}
-    .mark:first-child{border-top:none;}
   }
 
   /* ---------- water feature ---------- */
   .water-feature{background:var(--bg-alt); padding:3.4em 0;}
   .water-grid{display:grid; grid-template-columns:0.7fr 1.3fr; gap:2.6em; align-items:center;}
-  .water-grid img{width:100%; max-width:240px; box-shadow:var(--shadow); justify-self:center;}
+  .water-grid img{width:100%; max-width:240px; border-radius:var(--radius); box-shadow:var(--shadow-card); justify-self:center;}
   .water-copy h2{font-size:clamp(1.35rem,2.4vw,1.8rem);}
   .water-copy p{color:var(--ink-soft); margin-top:0.8em; font-size:1rem; max-width:52ch;}
   .water-copy .link-light{display:inline-block; margin-top:1em;}
@@ -269,35 +279,49 @@
   .section-head p{color:var(--ink-soft); margin:0.7em auto 0; font-size:1.02rem;}
   .section-head .eyebrow{justify-content:center; width:100%;}
 
+  .cabin-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:1.6em;
+  }
   .cabin{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:3.5em; align-items:center;
-    margin-bottom:5em;
+    background:var(--surface);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-card);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .cabin:last-child{margin-bottom:0;}
-  .cabin.reverse{grid-template-columns:0.9fr 1.1fr;}
-  .cabin.reverse .cabin-figure{order:2;}
-  .cabin.reverse .cabin-copy{order:1;}
-  .cabin-figure{position:relative; box-shadow:var(--shadow);}
-  .cabin-figure img{width:100%; aspect-ratio:6/5; object-fit:cover;}
+  .cabin:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
+  .cabin-figure{position:relative; cursor:pointer;}
+  .cabin-figure img{width:100%; aspect-ratio:4/3; object-fit:cover;}
   .cabin-index{
-    position:absolute; top:-14px; left:-14px;
-    background:var(--surface); color:var(--pine);
+    position:absolute; top:0.9em; left:0.9em;
+    background:rgba(251,249,241,0.92); color:var(--pine);
     font-family:var(--serif); font-weight:600; font-style:italic;
-    font-size:1rem; padding:0.5em 0.9em; box-shadow:var(--shadow);
+    font-size:0.9rem; padding:0.35em 0.8em; border-radius:100px;
   }
-  .cabin-copy h3{font-size:clamp(1.5rem,2.4vw,2rem); margin-bottom:0.55em;}
-  .cabin-copy p{color:var(--ink-soft); font-size:1.02rem; max-width:42ch;}
+  .cabin-copy{padding:1.4em 1.5em 1.6em; display:flex; flex-direction:column; flex:1;}
+  .cabin-copy h3{font-size:1.35rem; margin-bottom:0.45em; cursor:pointer;}
+  .cabin-copy p{color:var(--ink-soft); font-size:0.95rem; flex:1;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;}
   .cabin-meta{
-    display:inline-flex; margin-top:1.3em;
+    display:inline-flex; margin-top:1em; align-self:flex-start;
     background:rgba(46,74,55,0.08);
     color:var(--pine);
-    font-size:0.85rem; font-weight:700;
-    padding:0.5em 1em; border-radius:100px;
+    font-size:0.82rem; font-weight:700;
+    padding:0.45em 0.9em; border-radius:100px;
   }
-  .cabin-link{display:block; margin-top:1.3em;}
-  .cabin-more{display:block; margin-top:0.7em; font-size:0.92rem;}
-  .cabin-figure{cursor:pointer;}
-  .cabin-copy h3{cursor:pointer;}
+  .cabin-actions{display:flex; align-items:center; gap:1.2em; margin-top:1.2em; flex-wrap:wrap;}
+  .cabin-link{
+    display:inline-flex; align-items:center; gap:0.5em;
+    background:rgba(37,211,102,0.1); color:#1b8a45;
+    font-weight:700; font-size:0.88rem; text-decoration:none;
+    padding:0.6em 1.1em; border-radius:100px;
+  }
+  .cabin-link svg{width:1.15em; height:1.15em; flex-shrink:0;}
+  .cabin-more{font-size:0.88rem;}
+  @media (max-width:760px){
+    .cabin-grid{grid-template-columns:1fr;}
+  }
 
   /* ---------- cabin detail modal ---------- */
   body.modal-open{overflow:hidden;}
@@ -307,6 +331,7 @@
   .modal-panel{
     position:relative; background:var(--surface); color:var(--ink);
     width:min(900px, 100%); max-height:88vh; overflow:hidden;
+    border-radius:var(--radius);
     box-shadow:0 34px 90px -24px rgba(10,14,8,0.55);
     display:flex; flex-direction:column;
   }
@@ -329,6 +354,7 @@
   .modal-gallery figure:first-child img{aspect-ratio:16/9;}
   .modal-gallery img{
     width:100%; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; display:block;
+    border-radius:var(--radius-sm);
     transition:transform 0.25s ease, box-shadow 0.25s ease;
   }
   .modal-gallery img:hover{transform:scale(1.015); box-shadow:0 14px 30px -14px rgba(20,26,17,0.45); position:relative; z-index:1;}
@@ -395,15 +421,10 @@
     .lightbox-prev{left:0.5em;} .lightbox-next{right:0.5em;}
   }
 
-  @media (max-width:760px){
-    .cabin, .cabin.reverse{grid-template-columns:1fr; gap:1.6em;}
-    .cabin.reverse .cabin-figure, .cabin.reverse .cabin-copy{order:initial;}
-  }
-
   /* ---------- gallery / filmstrip ---------- */
-  .gallery{background:var(--dusk); color:var(--dusk-ink); padding:5em 0;}
-  .gallery .section-head p{color:var(--dusk-ink-soft);}
-  .gallery .section-head h2{color:var(--dusk-ink);}
+  .gallery{background:var(--bg-alt); color:var(--ink); padding:5em 0;}
+  .gallery .section-head p{color:var(--ink-soft);}
+  .gallery .section-head h2{color:var(--ink);}
   .gallery-video-cta{margin-top:0.9em !important; font-size:0.95rem;}
   .filmstrip-wrap{position:relative;}
   .filmstrip{
@@ -412,19 +433,20 @@
     scrollbar-width:none; -ms-overflow-style:none;
   }
   .filmstrip::-webkit-scrollbar{display:none; height:0;}
-  .film{flex:0 0 auto; width:min(72vw, 300px); scroll-snap-align:center; scroll-snap-stop:always;}
-  .film img{width:100%; aspect-ratio:4/5; object-fit:cover; cursor:zoom-in; transition:transform 0.25s ease;}
+  .film{flex:0 0 auto; width:min(72vw, 300px); scroll-snap-align:center; scroll-snap-stop:always;
+    background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow-card); padding:0.7em; overflow:hidden;}
+  .film img{width:100%; aspect-ratio:4/5; object-fit:cover; cursor:zoom-in; transition:transform 0.25s ease; border-radius:var(--radius-sm);}
   .film img:hover{transform:scale(1.02);}
-  .film figcaption{margin-top:0.8em; font-size:0.88rem; color:var(--dusk-ink-soft); font-weight:600; letter-spacing:0.02em;}
+  .film figcaption{margin-top:0.7em; padding:0 0.2em 0.2em; font-size:0.88rem; color:var(--ink-soft); font-weight:600; letter-spacing:0.02em;}
   .filmstrip-nav{
     position:absolute; top:40%; transform:translateY(-50%); z-index:2;
     width:2.6em; height:2.6em; border-radius:50%; border:none;
-    background:rgba(237,233,216,0.18); color:var(--dusk-ink); font-size:1.4rem; line-height:1;
-    cursor:pointer; backdrop-filter:blur(4px);
+    background:var(--surface); color:var(--ink); font-size:1.4rem; line-height:1;
+    cursor:pointer; box-shadow:var(--shadow-card);
     display:flex; align-items:center; justify-content:center;
     transition:background 0.2s ease;
   }
-  .filmstrip-nav:hover{background:rgba(237,233,216,0.32);}
+  .filmstrip-nav:hover{background:var(--bg);}
   .filmstrip-prev{left:-3.4em;}
   .filmstrip-next{right:-3.4em;}
   @media (max-width:900px){
@@ -445,18 +467,23 @@
   }
   .llegar-note{
     margin-top:1.6em; padding:1em 1.2em; background:var(--surface);
-    border-left:3px solid var(--ember); font-size:0.92rem; color:var(--ink-soft);
+    border-left:3px solid var(--ember); border-radius:var(--radius-sm);
+    box-shadow:var(--shadow-card); font-size:0.92rem; color:var(--ink-soft);
     max-width:44ch;
   }
   .llegar-actions{margin-top:1.8em;}
   .llegar-rating{margin-top:1em; font-size:0.92rem; color:var(--ink-soft); letter-spacing:0.02em;}
   .llegar-tip{margin-top:0.9em; font-size:0.9rem; color:var(--ink-soft); font-style:italic;}
-  .llegar-figure img{width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:var(--shadow);}
+  .llegar-figure img{width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:var(--radius); box-shadow:var(--shadow-card);}
 
   /* ---------- faq ---------- */
   .faq{padding:5em 0;}
-  .faq-list{margin-top:1em; border-top:1px solid var(--line);}
+  .faq-list{
+    margin-top:1em; background:var(--surface); border-radius:var(--radius);
+    box-shadow:var(--shadow-card); padding:0 1.6em; overflow:hidden;
+  }
   .faq-item{border-bottom:1px solid var(--line); padding:1.4em 0;}
+  .faq-item:last-child{border-bottom:none;}
   .faq-item summary{
     cursor:pointer; font-weight:700; font-size:1.05rem; color:var(--ink);
     list-style:none; display:flex; justify-content:space-between; align-items:center; gap:1em;
@@ -465,7 +492,7 @@
   .faq-item summary::after{content:"+"; font-family:var(--serif); font-size:1.4rem; color:var(--pine); flex-shrink:0; line-height:1;}
   .faq-item[open] summary::after{content:"–";}
   .faq-item p{color:var(--ink-soft); margin-top:0.9em; font-size:0.98rem; max-width:60ch;}
-  .llegar-figure iframe{width:100%; aspect-ratio:4/5; border:0; box-shadow:var(--shadow); filter:grayscale(0.15) contrast(1.05);}
+  .llegar-figure iframe{width:100%; aspect-ratio:4/5; border:0; border-radius:var(--radius); box-shadow:var(--shadow-card); filter:grayscale(0.15) contrast(1.05);}
   @media (max-width:760px){ .llegar-grid{grid-template-columns:1fr;} }
 
   /* ---------- cierre / contacto ---------- */
@@ -490,13 +517,27 @@
   .host cite{display:block; margin-top:0.9em; font-family:var(--sans); font-style:normal; font-weight:700; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--dusk-ink-soft);}
 
   /* ---------- footer ---------- */
-  footer{background:var(--pine); color:var(--dusk-ink-soft); padding:2.6em 0;}
-  .foot-inner{display:flex; flex-wrap:wrap; gap:1.2em 2.4em; align-items:center; justify-content:space-between;}
-  .foot-brand{font-family:var(--serif); font-style:italic; color:var(--dusk-ink); font-size:1.1rem;}
-  .foot-links{display:flex; gap:1.6em; list-style:none; margin:0; padding:0; flex-wrap:wrap;}
+  footer{background:var(--pine); color:var(--dusk-ink-soft); padding:3.4em 0 2em;}
+  .foot-top{display:grid; grid-template-columns:1.2fr 1fr; gap:2.4em; padding-bottom:2.2em;}
+  .foot-brand{font-family:var(--serif); font-style:italic; color:var(--dusk-ink); font-size:1.35rem;}
+  .foot-tagline{margin-top:0.7em; font-size:0.92rem; max-width:34ch; color:var(--dusk-ink-soft);}
+  .foot-social{display:flex; gap:0.7em; margin-top:1.2em;}
+  .foot-social a{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:2.4em; height:2.4em; border-radius:50%;
+    background:rgba(237,233,216,0.1); transition:background 0.18s ease;
+  }
+  .foot-social a:hover{background:rgba(237,233,216,0.2);}
+  .foot-social svg{width:1.3em; height:1.3em;}
+  .foot-heading{font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--dusk-ink); margin-bottom:1em;}
+  .foot-contact{display:grid; gap:0.7em; font-size:0.9rem;}
+  .foot-contact a{color:var(--dusk-ink-soft); text-decoration:none;}
+  .foot-contact a:hover{color:var(--dusk-ink);}
+  .foot-links{display:flex; gap:1.6em; list-style:none; margin:1.4em 0 0; padding:0; flex-wrap:wrap;}
   .foot-links a{color:var(--dusk-ink-soft); text-decoration:none; font-size:0.88rem; font-weight:600;}
   .foot-links a:hover{color:var(--dusk-ink);}
   .foot-fine{width:100%; font-size:0.78rem; color:rgba(166,176,155,0.7); margin-top:0.8em; border-top:1px solid rgba(237,233,216,0.1); padding-top:1.2em;}
+  @media (max-width:700px){ .foot-top{grid-template-columns:1fr;} }
 </style>
 <script type="application/ld+json">
 {
@@ -598,23 +639,26 @@
 
 <section class="intro on-light">
   <div class="wrap">
-    <div class="intro-head">
-      <p class="eyebrow on-light" style="justify-content:center;">Por qué Mapun</p>
-      <h2>Bosque, playa y ningún apuro</h2>
-    </div>
     <div class="marks">
       <div class="mark">
+        <span class="mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 7 10h3l-4 7h4l-2 5h8l-2-5h4l-4-7h3z"/></svg></span>
         <h3>Bosque nativo</h3>
         <p>Pinos y aromos que dan sombra propia, a un paso de las dunas.</p>
       </div>
       <div class="mark">
+        <span class="mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/><path d="M2 13c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/><circle cx="18" cy="6" r="2.2"/></svg></span>
         <h3>A pura playa</h3>
         <p>Las playas agrestes de Mar Azul, sin las multitudes del centro.</p>
       </div>
       <div class="mark">
+        <span class="mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="5"/></svg></span>
         <h3>Ritmo propio</h3>
         <p>Mate en la galería de día, guirnaldas de luz y estrellas de noche.</p>
       </div>
+    </div>
+    <div class="intro-head">
+      <p class="eyebrow on-light" style="justify-content:center;">Por qué Mapun</p>
+      <h2>Bosque, playa y ningún apuro</h2>
     </div>
   </div>
 </section>
@@ -640,84 +684,111 @@
       <p>Cada cabaña es distinta, pensada y decorada a mano por Andrea. Elegí la que más se parezca a tu forma de descansar.</p>
     </div>
 
+    <div class="cabin-grid">
     <div class="cabin">
       <div class="cabin-figure" data-open-modal="kepuche">
-        <span class="cabin-index">01</span>
+        <span class="cabin-index">01 · Kepuche</span>
         <img src="/images/img003.jpg" alt="Galería de madera de la cabaña Kepuche con parrilla propia, entre los árboles" loading="lazy">
       </div>
       <div class="cabin-copy">
         <h3 data-open-modal="kepuche">Kepuche</h3>
         <p>Living con mesada blanca y bajo mesada de madera, parrilla propia en la galería y cortinas de macramé que se mueven con el viento del bosque.</p>
         <span class="cabin-meta">2 personas adultas</span>
-        <a class="cabin-link link-light" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Kepuche" target="_blank" rel="noopener">Consultar por Kepuche →</a>
-        <a class="cabin-more link-light" href="#" data-open-modal="kepuche">Ver fotos y detalles →</a>
+        <div class="cabin-actions">
+          <a class="cabin-link" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Kepuche" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5a9.5 9.5 0 0 0-8.2 14.2L2.5 21.5l4.9-1.3A9.5 9.5 0 1 0 12 2.5Zm5.5 13.6c-.23.65-1.36 1.25-1.88 1.32-.48.07-1.09.1-1.76-.11-.4-.13-.93-.31-1.6-.6-2.81-1.22-4.65-4.07-4.79-4.26-.14-.19-1.15-1.53-1.15-2.92s.73-2.06.99-2.34c.26-.28.57-.35.76-.35h.54c.17.01.4-.07.63.48.23.58.8 1.98.87 2.12.07.15.12.32.02.51-.09.19-.14.31-.27.47-.13.16-.28.36-.4.48-.13.13-.27.28-.11.55.15.28.66 1.08 1.42 1.76.98.87 1.8 1.14 2.07 1.27.28.13.44.11.6-.07.17-.19.68-.8.86-1.07.18-.28.36-.23.6-.14.24.09 1.58.75 1.85.88.28.13.46.2.53.31.07.11.07.63-.16 1.28Z"/></svg>
+            <span>Consultar por WhatsApp</span>
+          </a>
+          <a class="cabin-more link-light" href="#" data-open-modal="kepuche">Ver fotos y detalles →</a>
+        </div>
       </div>
     </div>
 
-    <div class="cabin reverse">
+    <div class="cabin">
       <div class="cabin-figure" data-open-modal="lihue">
-        <span class="cabin-index">02</span>
+        <span class="cabin-index">02 · Lihué</span>
         <img src="/images/img004.jpg" alt="Dormitorio de la cabaña Lihué, con piso ajedrezado, techos de madera a dos aguas y lámpara de mimbre" loading="lazy">
       </div>
       <div class="cabin-copy">
         <h3 data-open-modal="lihue">Lihué</h3>
         <p>Techos de madera a dos aguas y piso ajedrezado, con una atmósfera cálida de puertas oscuras y textiles en capas — la más fotogénica y cuidada de Mapun, con su propio deck y cama balinesa.</p>
         <span class="cabin-meta">2 adultos + 1 niño</span>
-        <a class="cabin-link link-light" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Lihu%C3%A9" target="_blank" rel="noopener">Consultar por Lihué →</a>
-        <a class="cabin-more link-light" href="#" data-open-modal="lihue">Ver fotos y detalles →</a>
+        <div class="cabin-actions">
+          <a class="cabin-link" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Lihu%C3%A9" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5a9.5 9.5 0 0 0-8.2 14.2L2.5 21.5l4.9-1.3A9.5 9.5 0 1 0 12 2.5Zm5.5 13.6c-.23.65-1.36 1.25-1.88 1.32-.48.07-1.09.1-1.76-.11-.4-.13-.93-.31-1.6-.6-2.81-1.22-4.65-4.07-4.79-4.26-.14-.19-1.15-1.53-1.15-2.92s.73-2.06.99-2.34c.26-.28.57-.35.76-.35h.54c.17.01.4-.07.63.48.23.58.8 1.98.87 2.12.07.15.12.32.02.51-.09.19-.14.31-.27.47-.13.16-.28.36-.4.48-.13.13-.27.28-.11.55.15.28.66 1.08 1.42 1.76.98.87 1.8 1.14 2.07 1.27.28.13.44.11.6-.07.17-.19.68-.8.86-1.07.18-.28.36-.23.6-.14.24.09 1.58.75 1.85.88.28.13.46.2.53.31.07.11.07.63-.16 1.28Z"/></svg>
+            <span>Consultar por WhatsApp</span>
+          </a>
+          <a class="cabin-more link-light" href="#" data-open-modal="lihue">Ver fotos y detalles →</a>
+        </div>
       </div>
     </div>
 
     <div class="cabin">
       <div class="cabin-figure" data-open-modal="ayilen">
-        <span class="cabin-index">03</span>
+        <span class="cabin-index">03 · Ayilen</span>
         <img src="/images/img005.jpg" alt="Living y cocina de la cabaña Ayilen, con paredes de troncos, piso de terracota y mesa de comedor" loading="lazy">
       </div>
       <div class="cabin-copy">
         <h3 data-open-modal="ayilen">Ayilen</h3>
         <p>La más grande: paredes de troncos blanqueados, piso de terracota y un living-comedor de banquina larga para compartir en grupo o en familia.</p>
         <span class="cabin-meta">4 personas adultas</span>
-        <a class="cabin-link link-light" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Ayilen" target="_blank" rel="noopener">Consultar por Ayilen →</a>
-        <a class="cabin-more link-light" href="#" data-open-modal="ayilen">Ver fotos y detalles →</a>
+        <div class="cabin-actions">
+          <a class="cabin-link" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Ayilen" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5a9.5 9.5 0 0 0-8.2 14.2L2.5 21.5l4.9-1.3A9.5 9.5 0 1 0 12 2.5Zm5.5 13.6c-.23.65-1.36 1.25-1.88 1.32-.48.07-1.09.1-1.76-.11-.4-.13-.93-.31-1.6-.6-2.81-1.22-4.65-4.07-4.79-4.26-.14-.19-1.15-1.53-1.15-2.92s.73-2.06.99-2.34c.26-.28.57-.35.76-.35h.54c.17.01.4-.07.63.48.23.58.8 1.98.87 2.12.07.15.12.32.02.51-.09.19-.14.31-.27.47-.13.16-.28.36-.4.48-.13.13-.27.28-.11.55.15.28.66 1.08 1.42 1.76.98.87 1.8 1.14 2.07 1.27.28.13.44.11.6-.07.17-.19.68-.8.86-1.07.18-.28.36-.23.6-.14.24.09 1.58.75 1.85.88.28.13.46.2.53.31.07.11.07.63-.16 1.28Z"/></svg>
+            <span>Consultar por WhatsApp</span>
+          </a>
+          <a class="cabin-more link-light" href="#" data-open-modal="ayilen">Ver fotos y detalles →</a>
+        </div>
       </div>
     </div>
 
-    <div class="cabin reverse">
+    <div class="cabin">
       <div class="cabin-figure" data-open-modal="kupal">
-        <span class="cabin-index">04</span>
+        <span class="cabin-index">04 · Kupal</span>
         <img src="/images/img006.jpg" alt="Pasarela de madera propia hacia la cabaña Kupal, de frente acristalado y cortinas de macramé" loading="lazy">
       </div>
       <div class="cabin-copy">
         <h3 data-open-modal="kupal">Kupal</h3>
         <p>Una réplica de vagón de estilo nórdico y marítimo, minimalista. Se llega por una pasarela de madera propia hasta un interior luminoso envuelto en cortinas de macramé — la tiny house más distinta de las cinco.</p>
         <span class="cabin-meta">2 personas adultas</span>
-        <a class="cabin-link link-light" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Kupal" target="_blank" rel="noopener">Consultar por Kupal →</a>
-        <a class="cabin-more link-light" href="#" data-open-modal="kupal">Ver fotos y detalles →</a>
+        <div class="cabin-actions">
+          <a class="cabin-link" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Kupal" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5a9.5 9.5 0 0 0-8.2 14.2L2.5 21.5l4.9-1.3A9.5 9.5 0 1 0 12 2.5Zm5.5 13.6c-.23.65-1.36 1.25-1.88 1.32-.48.07-1.09.1-1.76-.11-.4-.13-.93-.31-1.6-.6-2.81-1.22-4.65-4.07-4.79-4.26-.14-.19-1.15-1.53-1.15-2.92s.73-2.06.99-2.34c.26-.28.57-.35.76-.35h.54c.17.01.4-.07.63.48.23.58.8 1.98.87 2.12.07.15.12.32.02.51-.09.19-.14.31-.27.47-.13.16-.28.36-.4.48-.13.13-.27.28-.11.55.15.28.66 1.08 1.42 1.76.98.87 1.8 1.14 2.07 1.27.28.13.44.11.6-.07.17-.19.68-.8.86-1.07.18-.28.36-.23.6-.14.24.09 1.58.75 1.85.88.28.13.46.2.53.31.07.11.07.63-.16 1.28Z"/></svg>
+            <span>Consultar por WhatsApp</span>
+          </a>
+          <a class="cabin-more link-light" href="#" data-open-modal="kupal">Ver fotos y detalles →</a>
+        </div>
       </div>
     </div>
 
     <div class="cabin">
       <div class="cabin-figure" data-open-modal="suyai">
-        <span class="cabin-index">05</span>
+        <span class="cabin-index">05 · Suyai</span>
         <img src="/images/img007.jpg" alt="Cocina de la cabaña Suyai, con revestimiento tipo subway tile y techos de madera a dos aguas" loading="lazy">
       </div>
       <div class="cabin-copy">
         <h3 data-open-modal="suyai">Suyai</h3>
         <p>El rincón más hogareño y simple de Mapun: cocina con revestimiento blanco, techos a dos aguas y una galería con reposera con dosel entre los pinos.</p>
         <span class="cabin-meta">2 adultos + 1 niño</span>
-        <a class="cabin-link link-light" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Suyai" target="_blank" rel="noopener">Consultar por Suyai →</a>
-        <a class="cabin-more link-light" href="#" data-open-modal="suyai">Ver fotos y detalles →</a>
+        <div class="cabin-actions">
+          <a class="cabin-link" href="https://wa.me/5491131727631?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20la%20caba%C3%B1a%20Suyai" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5a9.5 9.5 0 0 0-8.2 14.2L2.5 21.5l4.9-1.3A9.5 9.5 0 1 0 12 2.5Zm5.5 13.6c-.23.65-1.36 1.25-1.88 1.32-.48.07-1.09.1-1.76-.11-.4-.13-.93-.31-1.6-.6-2.81-1.22-4.65-4.07-4.79-4.26-.14-.19-1.15-1.53-1.15-2.92s.73-2.06.99-2.34c.26-.28.57-.35.76-.35h.54c.17.01.4-.07.63.48.23.58.8 1.98.87 2.12.07.15.12.32.02.51-.09.19-.14.31-.27.47-.13.16-.28.36-.4.48-.13.13-.27.28-.11.55.15.28.66 1.08 1.42 1.76.98.87 1.8 1.14 2.07 1.27.28.13.44.11.6-.07.17-.19.68-.8.86-1.07.18-.28.36-.23.6-.14.24.09 1.58.75 1.85.88.28.13.46.2.53.31.07.11.07.63-.16 1.28Z"/></svg>
+            <span>Consultar por WhatsApp</span>
+          </a>
+          <a class="cabin-more link-light" href="#" data-open-modal="suyai">Ver fotos y detalles →</a>
+        </div>
       </div>
+    </div>
     </div>
   </div>
 </section>
 
 <section class="gallery" id="galeria">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow on-dusk">Galería</p>
+    <div class="section-head on-light">
+      <p class="eyebrow on-light">Galería</p>
       <h2>Un vistazo a nuestro complejo</h2>
-      <p class="gallery-video-cta">¿Querés ver más? Mirá nuestros videos en <a class="link-dusk" href="https://www.instagram.com/cabaniasmapun/" target="_blank" rel="noopener">Instagram →</a></p>
+      <p class="gallery-video-cta">¿Querés ver más? Mirá nuestros videos en <a class="link-light" href="https://www.instagram.com/cabaniasmapun/" target="_blank" rel="noopener">Instagram →</a></p>
     </div>
     <div class="filmstrip-wrap">
     <button class="filmstrip-nav filmstrip-prev" id="filmPrev" aria-label="Foto anterior">‹</button>
@@ -836,9 +907,35 @@
 </section>
 
 <footer>
-  <div class="wrap foot-inner">
-    <span class="foot-brand">Cabañas Mapun</span>
-    <p class="foot-fine">Mar Azul, Villa Gesell, Buenos Aires · cabaniasmapun@gmail.com</p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <span class="foot-brand">Cabañas Mapun</span>
+        <p class="foot-tagline">Cabañas entre pinos, a un paso de las playas de Mar Azul. Un refugio pensado para volver a lo simple.</p>
+        <div class="foot-social">
+          <a href="https://instagram.com/cabaniasmapun" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+          </a>
+          <a href="https://wa.me/5491131727631" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5a9.5 9.5 0 0 0-8.2 14.2L2.5 21.5l4.9-1.3A9.5 9.5 0 1 0 12 2.5Zm5.5 13.6c-.23.65-1.36 1.25-1.88 1.32-.48.07-1.09.1-1.76-.11-.4-.13-.93-.31-1.6-.6-2.81-1.22-4.65-4.07-4.79-4.26-.14-.19-1.15-1.53-1.15-2.92s.73-2.06.99-2.34c.26-.28.57-.35.76-.35h.54c.17.01.4-.07.63.48.23.58.8 1.98.87 2.12.07.15.12.32.02.51-.09.19-.14.31-.27.47-.13.16-.28.36-.4.48-.13.13-.27.28-.11.55.15.28.66 1.08 1.42 1.76.98.87 1.8 1.14 2.07 1.27.28.13.44.11.6-.07.17-.19.68-.8.86-1.07.18-.28.36-.23.6-.14.24.09 1.58.75 1.85.88.28.13.46.2.53.31.07.11.07.63-.16 1.28Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <p class="foot-heading">Contacto y reservas</p>
+        <div class="foot-contact">
+          <a href="tel:+541131727631">011 3172-7631</a>
+          <a href="mailto:cabaniasmapun@gmail.com">cabaniasmapun@gmail.com</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Copacabana%201036%2C%20Mar%20Azul%2C%20Villa%20Gesell" target="_blank" rel="noopener">Copacabana 1036, Mar Azul, Villa Gesell</a>
+        </div>
+        <ul class="foot-links">
+          <li><a href="#cabanas">Cabañas</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-fine">© 2026 Cabañas Mapun · Mar Azul, Villa Gesell, Buenos Aires</p>
   </div>
 </footer>
 
