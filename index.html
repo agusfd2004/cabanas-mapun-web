@@ -1720,13 +1720,28 @@
     var dotsWrap = document.getElementById('filmDots');
     if(!strip || !prev || !next || !dotsWrap) return;
     var slides = Array.prototype.slice.call(strip.querySelectorAll('.film'));
+    function slideLeft(el){
+      return el.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
+    }
+    function nearestIndex(){
+      var pos = strip.scrollLeft;
+      var closest = 0, closestDist = Infinity;
+      slides.forEach(function(el, i){
+        var dist = Math.abs(slideLeft(el) - pos);
+        if(dist < closestDist){ closestDist = dist; closest = i; }
+      });
+      return closest;
+    }
+    function goToIndex(i){
+      i = Math.max(0, Math.min(i, slides.length - 1));
+      strip.scrollTo({left: Math.round(slideLeft(slides[i])), behavior: 'smooth'});
+      setActive(i);
+    }
     var dots = slides.map(function(_, i){
       var b = document.createElement('button');
       b.className = 'g-dot' + (i === 0 ? ' active' : '');
       b.setAttribute('aria-label', 'Foto ' + (i + 1));
-      b.addEventListener('click', function(){
-        strip.scrollTo({left: strip.clientWidth * i, behavior: 'smooth'});
-      });
+      b.addEventListener('click', function(){ goToIndex(i); });
       dotsWrap.appendChild(b);
       return b;
     });
@@ -1734,21 +1749,13 @@
       dots.forEach(function(d, idx){ d.classList.toggle('active', idx === i); });
     }
     strip.addEventListener('scroll', function(){
-      var i = Math.round(strip.scrollLeft / strip.clientWidth);
-      setActive(Math.max(0, Math.min(i, dots.length - 1)));
+      setActive(nearestIndex());
     });
-    function step(){
-      var film = strip.querySelector('.film');
-      if(!film) return strip.clientWidth;
-      var style = getComputedStyle(strip);
-      var gap = parseFloat(style.columnGap || style.gap || '0') || 0;
-      return film.getBoundingClientRect().width + gap;
-    }
     prev.addEventListener('click', function(){
-      strip.scrollBy({left: -step(), behavior: 'smooth'});
+      goToIndex(nearestIndex() - 1);
     });
     next.addEventListener('click', function(){
-      strip.scrollBy({left: step(), behavior: 'smooth'});
+      goToIndex(nearestIndex() + 1);
     });
   })();
 
